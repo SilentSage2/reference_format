@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="numeric" default-locale="en-US">
+  <info>
+    <title>Chicago Notes–Bibliography — numeric in-text, numbered bibliography</title>
+    <title-short>Chicago NB numeric</title-short>
+    <id>http://example.org/styles/chicago-nb-numeric-brackets</id>
+    <link href="http://example.org/styles/chicago-nb-numeric-brackets" rel="self"/>
+    <link href="http://www.zotero.org/styles/chicago-note-bibliography" rel="template"/>
+    <author>
+      <name>Custom</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="generic-base"/>
+    <summary>Chicago NB bibliography formatting; numeric in-text like [1], [2–3]; numbered bibliography 1., 2., single spaced.</summary>
+    <updated>2025-10-30T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <!-- ===== Macros ===== -->
+  <macro name="author-bib">
+    <names variable="author">
+      <name and="text" delimiter=", " initialize-with="." name-as-sort-order="first"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="editor-bib">
+    <names variable="editor">
+      <name and="text" delimiter=", " initialize-with="." name-as-sort-order="first"/>
+      <label form="short" prefix=", "/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+  <macro name="title-quoted">
+    <text variable="title" quotes="true"/>
+  </macro>
+
+  <macro name="title-italic">
+    <text variable="title" font-style="italic"/>
+  </macro>
+
+  <macro name="container-italic">
+    <text variable="container-title" font-style="italic"/>
+  </macro>
+
+  <macro name="volume-issue-year-pages">
+    <group delimiter=" ">
+      <group>
+        <text variable="volume"/>
+        <group delimiter="" prefix=", no. ">
+          <text variable="issue"/>
+        </group>
+      </group>
+      <group prefix=" (" suffix="):">
+        <text macro="issued-year"/>
+      </group>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <macro name="publisher-place">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <macro name="access">
+    <choose>
+      <if variable="DOI">
+        <text value="https://doi.org/"/>
+        <text variable="DOI"/>
+      </if>
+      <else-if variable="URL">
+        <text variable="URL"/>
+      </else-if>
+    </choose>
+  </macro>
+
+  <!-- ===== Citations (in-text) ===== -->
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <!-- ===== Bibliography ===== -->
+  <bibliography hanging-indent="true" entry-spacing="0" line-spacing="1" et-al-min="11" et-al-use-first="7">
+    <sort>
+      <key macro="author-bib"/>
+      <key macro="issued-year" sort="ascending"/>
+      <key variable="title"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <!-- Journal article -->
+        <if type="article-journal article-magazine article-newspaper" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <group delimiter=" ">
+              <text macro="container-italic"/>
+              <text macro="volume-issue-year-pages"/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </if>
+
+        <!-- Chapter / conference paper -->
+        <else-if type="chapter paper-conference" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <group>
+              <text term="in" text-case="capitalize-first" suffix=":"/>
+              <group delimiter=". ">
+                <group delimiter=", ">
+                  <text macro="container-italic"/>
+                  <text macro="editor-bib"/>
+                </group>
+                <text variable="collection-title"/>
+              </group>
+            </group>
+            <text variable="page" prefix="pp. "/>
+            <group>
+              <text macro="publisher-place"/>
+              <text macro="issued-year" prefix=", "/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <!-- Book -->
+        <else-if type="book">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-italic"/>
+            <group>
+              <text macro="publisher-place"/>
+              <text macro="issued-year" prefix=", "/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <!-- Thesis / report -->
+        <else-if type="thesis report" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-italic"/>
+            <group delimiter=", ">
+              <text variable="genre"/>
+              <text variable="publisher"/>
+              <text macro="issued-year"/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <!-- Web / preprint / dataset -->
+        <else-if type="webpage post post-weblog dataset manuscript preprint" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <text macro="container-italic"/>
+            <text macro="issued-year"/>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <!-- Fallback -->
+        <else>
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <text macro="container-italic"/>
+            <text macro="issued-year"/>
+            <text macro="access"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
