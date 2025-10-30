@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+  <locale xml:lang="en">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
   <info>
     <title>Chicago Notes–Bibliography (numeric in-text, single spaced)</title>
     <id>http://example.org/styles/chicago-nb-numeric-single-fixed</id>
