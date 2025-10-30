@@ -54,9 +54,9 @@
       <text macro="container-italic" suffix=" "/>
       <text variable="volume" suffix=", "/>
       <text variable="issue" prefix="no. "/>
-      <text macro="year-only" prefix=" (" suffix="): "/> 
-      <text variable="page" suffix=". "/>
-      <text variable="DOI" prefix="https://doi.org/"/>
+      <text macro="year-only" prefix=" (" suffix=")"/> 
+      <text variable="page" prefix=": "/>
+      <text variable="DOI" prefix=". https://doi.org/"/>
     </layout>
   </bibliography>
 </style>
