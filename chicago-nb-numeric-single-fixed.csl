@@ -22,7 +22,7 @@
   <macro name="author-bib">
     <names variable="author">
       <name and="text" initialize-with=". " name-as-sort-order="first"/>
-      <et-al term="et-al"/>
+      <et-al term="et-al" suffix=","/>
     </names>
   </macro>
 
