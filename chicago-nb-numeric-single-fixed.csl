@@ -38,13 +38,6 @@
     <text variable="container-title" font-style="italic"/>
   </macro>
 
-  <macro name="vol-issue-year-pages">
-      <text variable="volume" suffix=", "/>
-      <text variable="issue" prefix="no. "/>
-      <text macro="year-only" prefix="(" suffix="): "/> 
-      <text variable="page"/>
-  </macro>
-
   <!-- In-text citation: compact numeric ranges like [1–3] -->
   <citation collapse="citation-number" disambiguate-add-year-suffix="false">
     <layout prefix="[" suffix="]" delimiter=", ">
@@ -59,7 +52,10 @@
       <text macro="author-bib" suffix=". "/>
       <text macro="title-quoted" suffix=". "/>
       <text macro="container-italic" suffix=" "/>
-      <text macro="vol-issue-year-pages" suffix=". "/>
+      <text variable="volume" suffix=", "/>
+      <text variable="issue" prefix="no. "/>
+      <text macro="year-only" prefix="(" suffix="): "/> 
+      <text variable="page" suffix=". "/>
       <text variable="DOI" prefix="https://doi.org/"/>
     </layout>
   </bibliography>
