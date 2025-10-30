@@ -33,7 +33,7 @@
   </macro>
 
   <macro name="title-quoted">
-    <text variable="title" quotes="true"/>
+    <text variable="title" quotes="true" text-case="title" strip-periods="true"/>
   </macro>
 
   <macro name="title-italic">
