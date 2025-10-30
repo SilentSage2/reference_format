@@ -47,7 +47,7 @@
     </group>
   </macro>
 
-  <citation collapse="citation-number" disambiguate-add-year-suffix="false">
+  <citation collapse="citation-number-range" disambiguate-add-year-suffix="false">
     <layout delimiter=", ">
       <text variable="citation-number" prefix="[" suffix="]"/>
     </layout>
