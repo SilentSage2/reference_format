@@ -49,8 +49,8 @@
   <bibliography et-al-min="6" et-al-use-first="3" line-spacing="1" entry-spacing="0" second-field-align="flush">
     <layout>
       <text variable="citation-number" suffix=". "/>
-      <text macro="author-bib" suffix=". "/>
-      <text macro="title-quoted" suffix=". "/>
+      <text macro="author-bib" suffix=", "/>
+      <text macro="title-quoted" suffix=", "/>
       <text macro="container-italic" suffix=" "/>
       <text variable="volume" suffix=", "/>
       <text variable="issue" prefix="no. "/>
