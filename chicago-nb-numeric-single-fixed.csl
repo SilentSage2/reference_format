@@ -20,7 +20,7 @@
     </names>
   </macro>
 
-  <macro name="year">
+  <macro name="year-only">
     <date variable="issued">
       <date-part name="year"/>
     </date>
@@ -42,17 +42,19 @@
     <group delimiter=", ">
       <text variable="volume"/>
       <text variable="issue" prefix="no. "/>
-      <text macro="year" prefix="(" suffix="): "/> 
+      <text macro="year-only" prefix="(" suffix="): "/> 
     </group>
       <text variable="page"/>
   </macro>
 
+  <!-- In-text citation: compact numeric ranges like [1–3] -->
   <citation collapse="citation-number" disambiguate-add-year-suffix="false">
-    <layout delimiter=", ">
-      <text variable="citation-number" prefix="[" suffix="]"/>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
     </layout>
   </citation>
 
+  <!-- Bibliography: numbered, single-spaced; no year-suffix -->
   <bibliography et-al-min="6" et-al-use-first="3" line-spacing="1" entry-spacing="0" second-field-align="flush">
     <layout>
       <text variable="citation-number" suffix=". "/>
