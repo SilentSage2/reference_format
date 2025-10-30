@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="numeric" default-locale="en-US">
   <info>
-    <title>Chicago Notes–Bibliography (numeric, single spaced, with [1] in-text)</title>
-    <id>http://www.zx-custom.org/styles/chicago-nb-numeric-single</id>
-    <link href="http://www.chicagomanualofstyle.org/" rel="documentation"/>
+    <title>Chicago Notes–Bibliography (numeric in-text, numbered refs, single-spaced)</title>
+    <title-short>Chicago NB numeric (single)</title-short>
+    <id>http://example.org/styles/chicago-nb-numeric-single</id>
+    <link href="http://example.org/styles/chicago-nb-numeric-single" rel="self"/>
+    <link href="http://www.zotero.org/styles/chicago-note-bibliography" rel="template"/>
     <author>
-      <name>Custom CSL by ChatGPT</name>
+      <name>Custom</name>
     </author>
     <category citation-format="numeric"/>
     <category field="generic-base"/>
     <updated>2025-10-30T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
 
   <macro name="author-bib">
-    <names variable="author" delimiter=", ">
+    <names variable="author">
       <name and="text" delimiter=", " initialize-with="." name-as-sort-order="first"/>
       <et-al term="et-al"/>
     </names>
   </macro>
 
-  <macro name="issued-year">
+  <macro name="editor-bib">
+    <names variable="editor">
+      <name and="text" delimiter=", " initialize-with="." name-as-sort-order="first"/>
+      <label form="short" prefix=", "/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="year">
     <date variable="issued">
       <date-part name="year"/>
     </date>
@@ -29,11 +40,15 @@
     <text variable="title" quotes="true"/>
   </macro>
 
+  <macro name="title-italic">
+    <text variable="title" font-style="italic"/>
+  </macro>
+
   <macro name="container-italic">
     <text variable="container-title" font-style="italic"/>
   </macro>
 
-  <macro name="volume-issue-year-pages">
+  <macro name="vol-issue-year-pages">
     <group delimiter=" ">
       <group>
         <text variable="volume"/>
@@ -42,7 +57,7 @@
         </group>
       </group>
       <group prefix=" (" suffix="):">
-        <text macro="issued-year"/>
+        <text macro="year"/>
       </group>
       <text variable="page"/>
     </group>
@@ -66,18 +81,19 @@
     </choose>
   </macro>
 
-  <!-- In-text citations like [1], [2-3] -->
   <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
     <layout prefix="[" suffix="]" delimiter=", ">
       <text variable="citation-number"/>
     </layout>
   </citation>
 
-  <!-- Bibliography section -->
-  <bibliography et-al-min="11" et-al-use-first="7" hanging-indent="true" entry-spacing="0" line-spacing="1">
+  <bibliography hanging-indent="true" line-spacing="1" et-al-min="11" et-al-use-first="7">
     <sort>
       <key macro="author-bib"/>
-      <key macro="issued-year" sort="ascending"/>
+      <key macro="year" sort="ascending"/>
       <key variable="title"/>
     </sort>
     <layout suffix=".">
@@ -89,20 +105,55 @@
             <text macro="title-quoted"/>
             <group delimiter=" ">
               <text macro="container-italic"/>
-              <text macro="volume-issue-year-pages"/>
+              <text macro="vol-issue-year-pages"/>
             </group>
             <text macro="access"/>
           </group>
         </if>
 
-        <else-if type="book chapter paper-conference report thesis" match="any">
+        <else-if type="chapter paper-conference" match="any">
           <group delimiter=". ">
             <text macro="author-bib"/>
             <text macro="title-quoted"/>
             <group>
-              <text macro="container-italic"/>
-              <text macro="publisher-place" prefix=". "/>
-              <text macro="issued-year" prefix=", "/>
+              <text term="in" text-case="capitalize-first" suffix=":"/>
+              <group delimiter=". ">
+                <group delimiter=", ">
+                  <text macro="container-italic"/>
+                  <text macro="editor-bib"/>
+                </group>
+                <text variable="collection-title"/>
+              </group>
+            </group>
+            <text variable="page" prefix="pp. "/>
+            <group>
+              <text macro="publisher-place"/>
+              <text macro="year" prefix=", "/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <else-if type="book">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-italic"/>
+            <group>
+              <text macro="publisher-place"/>
+              <text macro="year" prefix=", "/>
+            </group>
+            <text macro="access"/>
+          </group>
+        </else-if>
+
+        <else-if type="thesis report" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-italic"/>
+            <group delimiter=", ">
+              <text variable="genre"/>
+              <text variable="publisher"/>
+              <text macro="year"/>
             </group>
             <text macro="access"/>
           </group>
@@ -113,7 +164,7 @@
             <text macro="author-bib"/>
             <text macro="title-quoted"/>
             <text macro="container-italic"/>
-            <text macro="issued-year"/>
+            <text macro="year"/>
             <text macro="access"/>
           </group>
         </else-if>
@@ -123,7 +174,7 @@
             <text macro="author-bib"/>
             <text macro="title-quoted"/>
             <text macro="container-italic"/>
-            <text macro="issued-year"/>
+            <text macro="year"/>
             <text macro="access"/>
           </group>
         </else>
