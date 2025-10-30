@@ -42,9 +42,9 @@
     <group delimiter=", ">
       <text variable="volume"/>
       <text variable="issue" prefix="no. "/>
-      <text macro="year" prefix="(" suffix="):"/>
-      <text variable="page"/>
+      <text macro="year" prefix="(" suffix="): "/> 
     </group>
+      <text variable="page"/>
   </macro>
 
   <citation collapse="citation-number" disambiguate-add-year-suffix="false">
