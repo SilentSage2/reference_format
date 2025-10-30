@@ -39,12 +39,10 @@
   </macro>
 
   <macro name="vol-issue-year-pages">
-    <group>
       <text variable="volume" suffix=", "/>
       <text variable="issue" prefix="no. "/>
       <text macro="year-only" prefix="(" suffix="): "/> 
       <text variable="page"/>
-    </group>
   </macro>
 
   <!-- In-text citation: compact numeric ranges like [1–3] -->
