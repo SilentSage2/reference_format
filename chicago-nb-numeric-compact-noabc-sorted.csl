@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
+  <info>
+    <title>Chicago NB — Numeric (sorted, compact ranges, no year-suffix, single-spaced)</title>
+    <id>http://example.org/styles/chicago-nb-numeric-compact-noabc-sorted</id>
+    <link href="http://www.zotero.org/styles/chicago-note-bibliography" rel="template"/>
+    <author><name>Custom</name></author>
+    <category citation-format="numeric"/>
+    <updated>2025-10-30T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</rights>
+  </info>
+
+  <macro name="author-bib">
+    <names variable="author">
+      <name and="text" initialize-with=". " name-as-sort-order="first"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+
+  <macro name="year-only">
+    <date variable="issued"><date-part name="year"/></date>
+  </macro>
+
+  <macro name="title-quoted"><text variable="title" quotes="true"/></macro>
+  <macro name="container-italic"><text variable="container-title" font-style="italic"/></macro>
+
+  <macro name="vol-issue-year-pages">
+    <group delimiter=" ">
+      <group>
+        <text variable="volume"/>
+        <group prefix=", no. ">
+          <text variable="issue"/>
+        </group>
+      </group>
+      <group prefix=" (" suffix="):">
+        <text macro="year-only"/>
+      </group>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <citation collapse="citation-number" disambiguate-add-year-suffix="false" disambiguate-add-names="false" disambiguate-add-givenname="false">
+    <sort>
+      <key variable="citation-number" sort="ascending"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography hanging-indent="true" line-spacing="1" entry-spacing="0"
+                et-al-min="11" et-al-use-first="7" disambiguate-add-year-suffix="false">
+    <sort>
+      <key macro="author-bib"/>
+      <key macro="year-only" sort="ascending"/>
+      <key variable="title"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal article-newspaper article-magazine" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <group delimiter=" ">
+              <text macro="container-italic"/>
+              <text macro="vol-issue-year-pages"/>
+            </group>
+            <choose>
+              <if variable="DOI">
+                <text variable="DOI" prefix="https://doi.org/"/>
+              </if>
+              <else-if variable="URL">
+                <text variable="URL"/>
+              </else-if>
+            </choose>
+          </group>
+        </if>
+        <else-if type="chapter paper-conference" match="any">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <group>
+              <text term="in" text-case="capitalize-first" suffix=":"/>
+              <text variable="container-title" font-style="italic"/>
+            </group>
+            <text variable="page" prefix=" pp. "/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+              <text macro="year-only"/>
+            </group>
+            <choose>
+              <if variable="DOI">
+                <text variable="DOI" prefix=" https://doi.org/"/>
+              </if>
+              <else-if variable="URL">
+                <text variable="URL" prefix=" "/>
+              </else-if>
+            </choose>
+          </group>
+        </else-if>
+        <else-if type="book">
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text variable="title" font-style="italic"/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text variable="publisher-place"/>
+              <text macro="year-only"/>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=". ">
+            <text macro="author-bib"/>
+            <text macro="title-quoted"/>
+            <text macro="container-italic"/>
+            <text macro="year-only"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
