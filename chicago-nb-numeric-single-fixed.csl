@@ -56,8 +56,8 @@
     <layout>
       <text variable="citation-number" suffix=". "/>
       <text macro="author-bib" suffix=", "/>
-      <text macro="title-quoted" suffix=", "/>
-      <text macro="container-italic" suffix=" "/>
+      <text macro="title-quoted" prefix=", " suffix=", "/>
+      <text macro="container-italic" prefix=", " suffix=" "/>
       <text variable="volume" suffix=", "/>
       <text variable="issue" prefix="no. "/>
       <text macro="year-only" prefix=" (" suffix=")"/> 
