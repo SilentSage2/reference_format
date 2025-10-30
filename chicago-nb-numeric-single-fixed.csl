@@ -33,7 +33,7 @@
   </macro>
 
   <macro name="title-quoted">
-    <text variable="title" quotes="true" text-case="title" strip-periods="true"/>
+    <text variable="title" quotes="true" text-case="title" strip-periods="true" suffix=","/>
   </macro>
 
   <macro name="title-italic">
@@ -55,9 +55,11 @@
   <bibliography et-al-min="6" et-al-use-first="3" line-spacing="1" entry-spacing="0" second-field-align="flush">
     <layout>
       <text variable="citation-number" suffix=". "/>
+    <group>
       <text macro="author-bib" suffix=", "/>
       <text macro="title-quoted" suffix=", "/>
       <text macro="container-italic" suffix=" "/>
+    </group>
       <text variable="volume" suffix=", "/>
       <text variable="issue" prefix="no. "/>
       <text macro="year-only" prefix=" (" suffix=")"/> 
